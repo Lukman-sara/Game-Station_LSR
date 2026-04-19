@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSR Game Station - Top Up & Joki Game Terpercaya</title>
+    <style>
+        /* CSS Dasar untuk Styling (Dark Theme Gaming) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1f1f1f;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff4500;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4500; /* Warna aksen oranye kemerahan */
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ff4500;
+        }
+        main {
+            padding: 40px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            color: #aaaaaa;
+        }
+        
+        /* Layout Grid untuk Form Top Up */
+        .topup-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        .card {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #cccccc;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            color: white;
+        }
+        
+        /* Grid Pilihan Diamond */
+        .grid-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .option-box {
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .option-box:hover {
+            border-color: #ff4500;
+            background-color: #33150b;
+        }
+        .diamond-amount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .price {
+            color: #ff4500;
+            font-size: 14px;
+        }
+
+        /* Tombol Beli */
+        .btn-beli {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-beli:hover {
+            background-color: #e03e00;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f1f1f;
+            padding: 40px 50px;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-section h4 {
+            color: #ff4500;
+            margin-bottom: 15px;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 8px;
+            color: #aaaaaa;
+        }
+        .footer-section ul li a {
+            color: #aaaaaa;
+            text-decoration: none;
+        }
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">LSR Game Station</a>
+        <nav>
+            <ul>
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Mobile Legends</a></li>
+                <li><a href="#">Valorant</a></li>
+                <li><a href="#">Jasa Joki</a></li>
+                <li><a href="#">Cek Pesanan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Top Up Mobile Legends: Bang Bang</h2>
+            <p>Proses Cepat, Harga Murah, Aman dan 100% Legal.</p>
+        </section>
+
+        <section class="topup-container">
+            <div class="left-column">
+                <div class="card">
+                    <h3>1. Masukkan Data Akun</h3>
+                    <div class="form-group">
+                        <label for="userid">User ID</label>
+                        <input type="text" id="userid" placeholder="Contoh: 12345678">
+                    </div>
+                    <div class="form-group">
+                        <label for="zoneid">Zone ID</label>
+                        <input type="text" id="zoneid" placeholder="Contoh: 1234">
+                    </div>
+                    <p style="font-size: 12px; color: #777; margin-top: 10px;">Untuk mengetahui User ID Anda, silakan klik menu profile dibagian kiri atas pada menu utama game.</p>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card">
+                    <h3>2. Pilih Nominal Top Up</h3>
+                    <div class="grid-options">
+                        <div class="option-box">
+                            <div class="diamond-amount">86 Diamonds</div>
+                            <div class="price">Rp 23.000</div>
+                        </div>
+                        <div class="option-box">
+                            <div class="diamond-amount">172 Diamonds</div>
+                            <div class="price">Rp 46.000</div>
+                        </div>
+                        <div class="option-box">
+                            <div class="diamond-amount">257 Diamonds</div>
+                            <div class="price">Rp 69.000</div>
+                        </div>
+                        <div class="option-box">
+                            <div class="diamond-amount">344 Diamonds</div>
+                            <div class="price">Rp 92.000</div>
+                        </div>
+                        <div class="option-box">
+                            <div class="diamond-amount">514 Diamonds</div>
+                            <div class="price">Rp 138.000</div>
+                        </div>
+                        <div class="option-box">
+                            <div class="diamond-amount">Weekly Pass</div>
+                            <div class="price">Rp 28.500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>3. Beli Sekarang</h3>
+                    <div class="form-group">
+                        <label for="whatsapp">Nomor WhatsApp (Bukti Pembelian)</label>
+                        <input type="text" id="whatsapp" placeholder="Contoh: 08123456789">
+                    </div>
+                    <button class="btn-beli">Beli Sekarang</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Tentang LSR Game Station</h4>
+                <p style="color: #aaaaaa; font-size: 14px;">Platform penyedia layanan Top Up Games dan Jasa Joki Rank termurah, tercepat, dan terpercaya di Indonesia.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Menu Bantuan</h4>
+                <ul>
+                    <li><a href="#">Cara Pembelian</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Kontak Owner</h4>
+                <ul>
+                    <li><strong>Owner:</strong> Moch Lukman Saepul Rajib</li>
+                    <li><strong>WhatsApp:</strong> 0821-2413-5338</li>
+                    <li><strong>Email:</strong> seupulrajib12@gmail.com</li>
+                    <li><strong>Instagram:</strong> <a href="https://instagram.com/moluk_sara" target="_blank">@moluk_sara</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 LSR Game Station by Moch Lukman Saepul Rajib. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
