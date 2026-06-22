@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Cryptographic Checkout Gateway | ElectroStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo"><i class="fa-solid fa-bolt"></i> ElectroStore Secure Gateway</a>
+        </div>
+    </header>
+
+    <main style="max-width: 1100px; margin: 8rem auto 4rem auto; padding: 0 2rem;">
+        
+        <div id="checkout-main-interface" style="display: grid; grid-template-columns: 1fr 420px; gap: 3rem; align-items: start;">
+            
+            <form id="checkout-core-form" onsubmit="executeSecurePayment(event)" style="background:#FFF; padding:2.5rem; border-radius:24px; box-shadow:var(--shadow-sm); border:1px solid var(--clr-border);">
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--clr-border);"><i class="fa-solid fa-user-shield"></i> Informasi Pengiriman</h2>
+                
+                <div style="margin-bottom: 1.25rem;">
+                    <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Nama Lengkap Pembeli *</label>
+                    <input type="text" id="co-name" placeholder="Contoh: Budi Santoso" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px;">
+                </div>
+                <div style="margin-bottom: 1.25rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <div>
+                        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Email Korespondensi *</label>
+                        <input type="email" id="co-email" placeholder="budi@domain.com" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Nomor HP / WhatsApp *</label>
+                        <input type="tel" id="co-phone" placeholder="081234567890" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Alamat Rumah Pengiriman Lengkap *</label>
+                    <textarea id="co-address" rows="3" placeholder="Nama jalan, nomor rumah, RT/RW, Kecamatan" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px; font-family:var(--font-main);"></textarea>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom: 2rem;">
+                    <div>
+                        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Kota / Kabupaten *</label>
+                        <input type="text" id="co-city" placeholder="Jakarta Pusat" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Kode Pos *</label>
+                        <input type="text" id="co-zip" placeholder="10110" required style="width:100%; padding:0.85rem; border:1px solid var(--clr-border); border-radius:8px;">
+                    </div>
+                </div>
+
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--clr-border);"><i class="fa-solid fa-credit-card"></i> Metode Gateway Pembayaran Omnichannel</h2>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <label style="border:2px solid #0057FF; padding:1.25rem; border-radius:12px; display:flex; align-items:center; gap:0.75rem; background:rgba(0,87,255,0.02); cursor:pointer;">
+                        <input type="radio" name="payment-gateway" value="Midtrans Dummy" checked style="transform: scale(1.2);">
+                        <div><strong style="display:block; font-size:0.9rem;">Midtrans Instant Gateway</strong><span style="font-size:0.75rem; color:var(--clr-text-muted);">Virtual Account Automatis</span></div>
+                    </label>
+                    <label style="border:1px solid var(--clr-border); padding:1.25rem; border-radius:12px; display:flex; align-items:center; gap:0.75rem; cursor:pointer;">
+                        <input type="radio" name="payment-gateway" value="Xendit Dummy" style="transform: scale(1.2);">
+                        <div><strong style="display:block; font-size:0.9rem;">Xendit Matrix Hub</strong><span style="font-size:0.75rem; color:var(--clr-text-muted);">QRIS / Retail Outlet</span></div>
+                    </label>
+                    <label style="border:1px solid var(--clr-border); padding:1.25rem; border-radius:12px; display:flex; align-items:center; gap:0.75rem; cursor:pointer;">
+                        <input type="radio" name="payment-gateway" value="PayPal Dummy" style="transform: scale(1.2);">
+                        <div><strong style="display:block; font-size:0.9rem;">PayPal International</strong><span style="font-size:0.75rem; color:var(--clr-text-muted);">Mata Uang Asing / USD Convert</span></div>
+                    </label>
+                    <label style="border:1px solid var(--clr-border); padding:1.25rem; border-radius:12px; display:flex; align-items:center; gap:0.75rem; cursor:pointer;">
+                        <input type="radio" name="payment-gateway" value="Transfer Bank Manual" style="transform: scale(1.2);">
+                        <div><strong style="display:block; font-size:0.9rem;">Transfer Manual Escrow</strong><span style="font-size:0.75rem; color:var(--clr-text-muted);">Verifikasi Cek Manual 1x24 Jam</span></div>
+                    </label>
+                </div>
+
+                <button type="submit" style="width:100%; margin-top:2.5rem; background:#0057FF; color:#FFF; padding:1.2rem; border-radius:12px; font-weight:700; font-size:1.1rem; box-shadow:0 10px 25px rgba(0,87,255,0.25);">Otorisasi Transaksi Pembayaran Aman</button>
+            </form>
+
+            <aside style="background:#FFF; padding:2rem; border-radius:24px; box-shadow:var(--shadow-sm); border:1px solid var(--clr-border);">
+                <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:1.5rem;">Review Item Belanja</h3>
+                <div id="checkout-items-preview-stack" style="display:flex; flex-direction:column; gap:1rem; margin-bottom:1.5rem; max-height:280px; overflow-y:auto; padding-right:0.25rem;">
+                    </div>
+                <div style="border-top:1px dashed var(--clr-border); padding-top:1.5rem; display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem;">
+                    <div class="flex justify-between" style="display:flex; justify-content:space-between; color:var(--clr-text-muted);"><span>Subtotal</span><span id="co-subtotal">Rp 0</span></div>
+                    <div class="flex justify-between" style="display:flex; justify-content:space-between; color:var(--clr-text-muted);"><span>PPN 11%</span><span id="co-tax">Rp 0</span></div>
+                    <div class="flex justify-between" style="display:flex; justify-content:space-between; font-weight:700; font-size:1.2rem; border-top:1px solid var(--clr-light); padding-top:1rem;"><span>Total Tagihan</span><span id="co-grandtotal" style="color:#0057FF;">Rp 0</span></div>
+                </div>
+            </aside>
+        </div>
+
+        <section id="checkout-success-receipt-screen" style="display:none; max-width:650px; margin: 0 auto; background:#FFF; border-radius:24px; padding:3.5rem; text-align:center; box-shadow:var(--shadow-lg); border:1px solid var(--clr-border);">
+            <div style="width:90px; height:90px; background:rgba(16,185,129,0.1); color:#10B981; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem auto; font-size:3rem;">
+                <i class="fa-solid fa-shield-check"></i>
+            </div>
+            <h1 style="font-size:2.2rem; font-weight:700; color:#0B0F19; margin-bottom:0.5rem;">Pembayaran Berhasil!</h1>
+            <p style="color:var(--clr-text-muted); margin-bottom:2.5rem;">Dana Anda telah sukses diotorisasi secara aman oleh jaringan gerbang pembayaran partner kami.</p>
+            
+            <div style="background:var(--clr-light); border-radius:16px; padding:2rem; text-align:left; font-family:monospace; font-size:0.9rem; margin-bottom:2.5rem; border:1px solid var(--clr-border);">
+                <div style="text-align:center; font-weight:bold; font-size:1.1rem; margin-bottom:1rem; border-bottom:1px dashed #CBD5E1; padding-bottom:0.5rem;">ELECTROSTORE OFFICIAL INVOICE</div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;"><span>No. Invoice:</span><span id="receipt-invoice-id" style="font-weight:bold; color:#0057FF;">ES-INV-XXXXXXXX</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;"><span>Tanggal / Jam:</span><span id="receipt-timestamp">2026-06-21 15:30</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;"><span>Nama Pelanggan:</span><span id="receipt-client-name">N/A</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;"><span>Metode Payment:</span><span id="receipt-gateway-used">Midtrans Dummy</span></div>
+                <div style="border-top:1px dashed #CBD5E1; margin:1rem 0; padding-top:0.5rem; display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem;"><span>TOTAL LUNAS:</span><span id="receipt-amount-paid">Rp 0</span></div>
+            </div>
+
+            <button onclick="window.location.href='index.html'" class="btn-premium" style="width:100%;">Kembali Ke Beranda Utama</button>
+        </section>
+
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AnalyticsTracker.trackCheckoutStep("Isi Data Formulir");
+            populateCheckoutSummary();
+        });
+
+        function populateCheckoutSummary() {
+            const rawCart = Cart.getStorage();
+            if(rawCart.length === 0) {
+                window.location.href = "catalog.html";
+                return;
+            }
+
+            const previewStack = document.getElementById('checkout-items-preview-stack');
+            previewStack.innerHTML = "";
+
+            rawCart.forEach(item => {
+                const prod = products.find(p => p.id === item.id);
+                if(prod) {
+                    const row = document.createElement('div');
+                    row.style.cssText = "display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;";
+                    row.innerHTML = `
+                        <span style="max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${prod.name} <strong>x${item.qty}</strong></span>
+                        <span style="font-weight:600;">${formatRupiahGlobal(prod.price * item.qty)}</span>
+                    `;
+                    previewStack.appendChild(row);
+                }
+            });
+
+            const calcs = Cart.getCalculations();
+            document.getElementById('co-subtotal').innerText = formatRupiahGlobal(calcs.subtotal);
+            document.getElementById('co-tax').innerText = formatRupiahGlobal(calcs.tax);
+            document.getElementById('co-grandtotal').innerText = formatRupiahGlobal(calcs.grandTotal);
+        }
+
+        // ENGINE VALIDATOR REGEX DAN TRANSAKSI PAYMENT CHECKOUT
+        function executeSecurePayment(event) {
+            event.preventDefault();
+
+            // Ambil Nilai Value Input DOM Form
+            const name = document.getElementById('co-name').value.trim();
+            const email = document.getElementById('co-email').value.trim();
+            const phone = document.getElementById('co-phone').value.trim();
+            const address = document.getElementById('co-address').value.trim();
+            const city = document.getElementById('co-city').value.trim();
+            const zip = document.getElementById('co-zip').value.trim();
+            const gatewayUsed = document.querySelector('input[name="payment-gateway"]:checked').value;
+
+            // STRATEGI VALIDASI EXPRESSION KODE RESTRUKTURISASI
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^(?:\+62|62|0)8[1-9][0-9]{6,11}$/;
+
+            if(!emailRegex.test(email)) {
+                alert("Format email salah/tidak sah. Mohon periksa kembali alamat email Anda.");
+                return;
+            }
+            if(!phoneRegex.test(phone)) {
+                alert("Nomor HP tidak valid untuk jaringan seluler Indonesia. Gunakan format standar (contoh: 08123456789).");
+                return;
+            }
+
+            const calcs = Cart.getCalculations();
+            const generatedInvoiceId = `ES-INV-${Math.floor(100000 + Math.random() * 900000)}-2026`;
+            
+            // Trigger Analytics Event
+            AnalyticsTracker.trackPurchase(generatedInvoiceId, calcs.grandTotal);
+
+            // GANTI TAMPILAN INTERFACE DARI FORM MENJADI INVOICE SUKSES RESMI
+            document.getElementById('checkout-main-interface').style.display = 'none';
+            
+            const successScreen = document.getElementById('checkout-success-receipt-screen');
+            document.getElementById('receipt-invoice-id').innerText = generatedInvoiceId;
+            document.getElementById('receipt-client-name').innerText = name;
+            document.getElementById('receipt-gateway-used').innerText = gatewayUsed;
+            document.getElementById('receipt-amount-paid').innerText = formatRupiahGlobal(calcs.grandTotal);
+            
+            const now = new Date();
+            document.getElementById('receipt-timestamp').innerText = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+            
+            successScreen.style.display = 'block';
+
+            // Bersihkan data belanja setelah transaksi selesai
+            Cart.clear();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja Premium | ElectroStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo"><i class="fa-solid fa-bolt"></i> ElectroStore</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="catalog.html" class="nav-link">Produk</a></li>
+            </ul>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-icon-btn"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 1280px; margin: 8rem auto 4rem auto; padding: 0 2rem;">
+        <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 2.5rem;"><i class="fa-solid fa-basket-shopping"></i> Keranjang Belanja Anda</h1>
+
+        <div id="cart-workspace-layout" style="display: grid; grid-template-columns: 1fr 400px; gap: 3rem; align-items: start;">
+            
+            <section id="cart-items-list-wrapper" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                </section>
+
+            <aside style="background: #FFF; padding: 2.5rem; border-radius: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--clr-border);">
+                <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--clr-border);">Ringkasan Pesanan</h2>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--clr-text-muted);">
+                    <span>Total Subtotal Item</span>
+                    <span id="summary-subtotal">Rp 0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; color: var(--clr-text-muted);">
+                    <span>Pajak Fiskal (PPN 11%)</span>
+                    <span id="summary-tax">Rp 0</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--clr-border); font-weight: 700; font-size: 1.3rem;">
+                    <span>Grand Total</span>
+                    <span id="summary-grandtotal" style="color: #0057FF;">Rp 0</span>
+                </div>
+
+                <a href="checkout.html" style="background: #0057FF; color: #FFF; display: block; text-align: center; padding: 1.1rem; border-radius: 12px; font-weight: 600; font-size: 1.05rem; box-shadow: 0 8px 20px rgba(0,87,255,0.2);">Lanjut Ke Checkout Resmi</a>
+                <a href="catalog.html" style="display: block; text-align: center; margin-top: 1rem; color: var(--clr-text-muted); font-size: 0.95rem; font-weight: 500;">← Kembali Tambah Belanja</a>
+            </aside>
+        </div>
+
+        <div id="cart-empty-fallback-view" style="display: none; text-align: center; padding: 6rem 2rem; background: #FFF; border-radius: 24px; border: 1px solid var(--clr-border);">
+            <div style="width: 120px; height: 120px; background: rgba(0,87,255,0.06); color: #0057FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem auto; font-size: 3.5rem;">
+                <i class="fa-solid fa-cart-arrow-down"></i>
+            </div>
+            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Keranjang Anda Masih Kosong</h2>
+            <p style="color: var(--clr-text-muted); margin-bottom: 2rem; max-width: 450px; margin-left: auto; margin-right: auto;">Anda belum memasukkan gawai elektronik apa pun ke dalam daftar belanja. Silakan temukan produk terbaik kami di halaman katalog resmi.</p>
+            <a href="catalog.html" class="btn-premium" style="display: inline-block;">Mulai Telusuri Produk Sekarang</a>
+        </div>
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartWorkspace();
+            window.addEventListener('cartUpdated', renderCartWorkspace);
+        });
+
+        function renderCartWorkspace() {
+            const rawCart = Cart.getStorage();
+            const container = document.getElementById('cart-items-list-wrapper');
+            const workspace = document.getElementById('cart-workspace-layout');
+            const fallback = document.getElementById('cart-empty-fallback-view');
+
+            if(rawCart.length === 0) {
+                workspace.style.display = 'none';
+                fallback.style.display = 'block';
+                return;
+            }
+
+            workspace.style.display = 'grid';
+            fallback.style.display = 'none';
+            container.innerHTML = "";
+
+            rawCart.forEach(item => {
+                const prod = products.find(p => p.id === item.id);
+                if (!prod) return;
+
+                const card = document.createElement('div');
+                card.style.cssText = "background: #FFF; border-radius: 16px; padding: 1.5rem; display: flex; gap: 1.5rem; align-items: center; border: 1px solid var(--clr-border); box-shadow: var(--shadow-sm);";
+                card.innerHTML = `
+                    <img src="${prod.image}" alt="${prod.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                    <div style="flex-grow: 1;">
+                        <span style="font-size: 0.8rem; color:#0057FF; font-weight:600; text-transform:uppercase;">${prod.brand}</span>
+                        <h3 style="font-size: 1.1rem; font-weight:600; color:var(--clr-dark); margin-bottom:0.25rem;">${prod.name}</h3>
+                        <div style="font-weight: 700; color: var(--clr-dark);">${formatRupiahGlobal(prod.price)}</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--clr-border); padding: 0.25rem 0.5rem; border-radius: 8px; background: var(--clr-light);">
+                        <button onclick="Cart.updateQuantity('${prod.id}', ${item.qty - 1})" style="background:transparent; font-weight:bold; padding:0.25rem 0.5rem;">-</button>
+                        <span style="font-weight: 600; width: 30px; text-align: center;">${item.qty}</span>
+                        <button onclick="Cart.updateQuantity('${prod.id}', ${item.qty + 1})" style="background:transparent; font-weight:bold; padding:0.25rem 0.5rem;">+</button>
+                    </div>
+                    <div style="text-align: right; min-width: 140px;">
+                        <div style="font-size: 0.8rem; color: var(--clr-text-muted);">Subtotal</div>
+                        <div style="font-weight: 700; font-size: 1.1rem; color: var(--clr-dark);">${formatRupiahGlobal(prod.price * item.qty)}</div>
+                    </div>
+                    <button onclick="Cart.removeItem('${prod.id}')" style="background: transparent; color: #EF4444; padding: 0.5rem; font-size: 1.1rem;" aria-label="Hapus produk"><i class="fa-solid fa-trash-can"></i></button>
+                `;
+                container.appendChild(card);
+            });
+
+            // Sinkronisasi Nilai Angka Financial Summary
+            const calcs = Cart.getCalculations();
+            document.getElementById('summary-subtotal').innerText = formatRupiahGlobal(calcs.subtotal);
+            document.getElementById('summary-tax').innerText = formatRupiahGlobal(calcs.tax);
+            document.getElementById('summary-grandtotal').innerText = formatRupiahGlobal(calcs.grandTotal);
+        }
+    </script>
+</body>
+</html>

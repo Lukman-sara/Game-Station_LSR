@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk Elektronik Premium | ElectroStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo"><i class="fa-solid fa-bolt"></i> ElectroStore</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="catalog.html" class="nav-link active">Produk</a></li>
+                <li><a href="business-overview.html" class="nav-link">Tentang Kami</a></li>
+            </ul>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-icon-btn">
+                    <i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 1280px; margin: 8rem auto 4rem auto; padding: 0 2rem;">
+        <div style="margin-bottom: 3rem; text-align: center;">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Etalase Produk Resmi</h1>
+            <p style="color: var(--clr-text-muted);">Gunakan kontrol filter presisi tinggi untuk memilah kebutuhan gadget spesifik Anda.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;">
+            
+            <aside style="background: #FFF; padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--clr-border);">
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-magnifying-glass"></i> Pencarian</h3>
+                    <input type="text" id="search-product-input" placeholder="Cari nama gawai..." style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--clr-border); border-radius: 8px; font-size: 0.9rem;">
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-layer-group"></i> Filter Kategori</h3>
+                    <select id="filter-category-select" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--clr-border); border-radius: 8px; font-size: 0.9rem; background: #FFF;">
+                        <option value="ALL">Semua Kategori</option>
+                        <option value="Smartphone">Smartphones</option>
+                        <option value="Laptop">Laptops</option>
+                        <option value="Aksesoris">Aksesoris</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-money-bill-wave"></i> Batas Anggaran Harga</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-size: 0.8rem; color: var(--clr-text-muted);">Harga Maksimal (IDR)</label>
+                        <input type="number" id="filter-price-max" value="50000000" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--clr-border); border-radius: 8px; font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"><i class="fa-solid fa-arrow-down-short-wide"></i> Sortir Urutan</h3>
+                    <select id="sort-order-select" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--clr-border); border-radius: 8px; font-size: 0.9rem; background: #FFF;">
+                        <option value="DEFAULT">Rekomendasi</option>
+                        <option value="PRICE_ASC">Harga: Termurah</option>
+                        <option value="PRICE_DESC">Harga: Termahal</option>
+                        <option value="RATING_DESC">Rating Tertinggi</option>
+                    </select>
+                </div>
+            </aside>
+
+            <section>
+                <div style="margin-bottom: 1.5rem; color: var(--clr-text-muted); font-weight: 500;" id="catalog-counter-text">
+                    Menampilkan total produk...
+                </div>
+                <div id="catalog-products-main-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem;">
+                    </div>
+                <div id="catalog-empty-fallback" style="display: none; text-align: center; padding: 5rem 2rem;">
+                    <i class="fa-solid fa-box-open" style="font-size: 4rem; color: var(--clr-text-muted); margin-bottom: 1.5rem;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Produk Tidak Ditemukan</h3>
+                    <p style="color: var(--clr-text-muted);">Silakan sesuaikan kembali kriteria kata kunci pencarian atau penyaringan filter Anda.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container" style="max-w:1280px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div>
+                <h3>ElectroStore</h3>
+                <p>Ekosistem e-commerce terpercaya Indonesia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // CORE REALTME ENGINE FILTER DAN SEARCH INTEGRATED VIA VANILLA DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInp = document.getElementById('search-product-input');
+            const categorySel = document.getElementById('filter-category-select');
+            const priceMaxInp = document.getElementById('filter-price-max');
+            const sortSel = document.getElementById('sort-order-select');
+
+            // Tangkap query URL jika diarahkan dari beranda (Homepage)
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialCategory = urlParams.get('category');
+            if (initialCategory) {
+                categorySel.value = initialCategory;
+            }
+
+            function processFilters() {
+                const keyword = searchInp.value.toLowerCase().trim();
+                const selectedCategory = categorySel.value;
+                const maxPrice = parseFloat(priceMaxInp.value) || 999999999;
+                const sortType = sortSel.value;
+
+                let filtered = products.filter(p => {
+                    const matchKeyword = p.name.toLowerCase().includes(keyword) || p.brand.toLowerCase().includes(keyword);
+                    const matchCategory = (selectedCategory === "ALL") || (p.category === selectedCategory);
+                    const matchPrice = p.price <= maxPrice;
+                    return matchKeyword && matchCategory && matchPrice;
+                });
+
+                // PROSES SORTING LOGIC DATA OBJECT ARRAY ES6+
+                if (sortType === "PRICE_ASC") {
+                    filtered.sort((a, b) => a.price - b.price);
+                } else if (sortType === "PRICE_DESC") {
+                    filtered.sort((a, b) => b.price - a.price);
+                } else if (sortType === "RATING_DESC") {
+                    filtered.sort((a, b) => b.rating - a.rating);
+                }
+
+                renderCatalogGrid(filtered);
+            }
+
+            function renderCatalogGrid(items) {
+                const grid = document.getElementById('catalog-products-main-grid');
+                const fallback = document.getElementById('catalog-empty-fallback');
+                const counter = document.getElementById('catalog-counter-text');
+
+                grid.innerHTML = "";
+                counter.innerText = `Menampilkan ${items.length} Gawai Elektronik Terbaik`;
+
+                if(items.length === 0) {
+                    grid.style.display = 'none';
+                    fallback.style.display = 'block';
+                } else {
+                    grid.style.display = 'grid';
+                    fallback.style.display = 'none';
+
+                    items.forEach(prod => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                            <div class="product-img-holder">
+                                <img src="${prod.image}" alt="${prod.name}">
+                            </div>
+                            <span class="product-meta">${prod.brand} • ${prod.category}</span>
+                            <h3 class="product-name" style="font-size:1rem; height:48px; overflow:hidden;">${prod.name}</h3>
+                            <div class="product-rating">
+                                <i class="fa-solid fa-star"></i> ${prod.rating}
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price" style="font-size:1.1rem;">${formatRupiahGlobal(prod.price)}</div>
+                                <div style="display:flex; gap:0.25rem;">
+                                    <button onclick="openProductDetailModal('${prod.id}')" style="background:#F4F6FA; padding:0.4rem 0.6rem; border-radius:6px; font-weight:600; font-size:0.75rem;">Detail</button>
+                                    <button onclick="Cart.addItem('${prod.id}', 1);" class="btn-icon-cart" style="width:34px; height:34px;"><i class="fa-solid fa-cart-plus" style="font-size:0.9rem;"></i></button>
+                                </div>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                }
+            }
+
+            // Pasang event listener untuk memproses filter secara realtime
+            searchInp.addEventListener('input', processFilters);
+            categorySel.addEventListener('change', processFilters);
+            priceMaxInp.addEventListener('input', processFilters);
+            sortSel.addEventListener('change', processFilters);
+
+            // Eksekusi render pertama kali saat halaman dimuat
+            processFilters();
+        });
+    </script>
+</body>
+</html>
